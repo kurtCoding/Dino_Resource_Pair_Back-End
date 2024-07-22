@@ -1,5 +1,5 @@
 {
-  "name": "dino_back-end",
+  "name": "dino_resource_pair_back-end",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,7 +10,6 @@
     "db:seed": "psql -U postgres -f db/seed.sql",
     "db:everything": "npm run db:init && npm run db:seed"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
