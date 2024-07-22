@@ -11,3 +11,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("Welcome to the DinoSite!!");
 });
+
+app.use("./dinos", dinoController);
+
+app.get("*", (req, res) => {
+    res.status(404).send("Page not found");
+});
+
+module.exports = app;
