@@ -18,4 +18,15 @@ dinos.get("/", async (req, res) => {
     }
 });
 
+// New route for getting a dinosaur by name 
+dinos.get('/:name', async (req, res) => {
+    const name = req.params.name;
+    const dino = await getDino(name);
+    if (dino) {
+      res.status(200).json(dino);
+    } else {
+      res.status(404).json({ error: 'Dinosaur not found try again' });
+    }
+  });
+
 module.exports = dinos;
