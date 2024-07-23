@@ -22,8 +22,27 @@ const getDino = async (name) => {
     }
 };
 
+// create dino
+const createDino = async (name, era, diet, length, weight, habitat, year_discovered, bipedal) => {
+    const query = `
+        INSERT INTO dinos (name, era, diet, length, weight, habitat, year_discovered, bipedal)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        RETURNING *;
+    `;
+
+    try {
+        const newDino = await db.one(query, [name, era, diet, length, weight, habitat, year_discovered, bipedal]);
+        return newDino;
+    } catch (error) {
+        console.error('cannot create dino Try again:', error);
+        return null;
+    }
+};
+
+
 module.exports = {
     getAllDinos,
-    getDino
+    getDino,
+    createDino
 
 }
