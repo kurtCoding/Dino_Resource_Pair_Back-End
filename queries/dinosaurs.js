@@ -9,10 +9,9 @@ const getAllDinos = async () => {
     }
 };
 
-//get dino by name
 const getDino = async (name) => {
     const query = 'SELECT * FROM dinosaurs WHERE name = $1';
-  
+
     try {
         const dino = await db.one(query, [name]);
         return dino;
@@ -22,9 +21,6 @@ const getDino = async (name) => {
     }
 };
 
-
-
-// create  a new dino
 const createDino = async (name, era, diet, length, weight, habitat, year_discovered, bipedal) => {
     const query = `
         INSERT INTO dinos (name, era, diet, length, weight, habitat, year_discovered, bipedal)
@@ -40,10 +36,6 @@ const createDino = async (name, era, diet, length, weight, habitat, year_discove
         return null;
     }
 };
-
-
-
-//Update Dino 
 
 const updateDino = async (id, name, era, diet, length, weight, habitat, year_discovered, bipedal) => {
     const query = `

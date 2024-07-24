@@ -18,7 +18,6 @@ dinos.get("/", async (req, res) => {
     }
 });
 
-// New route for getting a dinosaur by name 
 dinos.get('/:name', async (req, res) => {
     const name = req.params.name;
     const dino = await getDino(name);
@@ -28,5 +27,30 @@ dinos.get('/:name', async (req, res) => {
       res.status(404).json({ error: 'Dinosaur not found try again' });
     }
   });
+
+dinos.post("/", checkName, checkBoolean, async (req, res) => {
+    const dino = await createDino(req.body);
+    res.json(dino);
+});
+
+dinos.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    const deletedDino = await deleteDino(id);
+    if (deletedDino.id) {
+        res.status(200)/json(deletedDino);
+    } else {
+        res.status(404).json("Dino not found");
+    }
+});
+
+dinos.put("/:id", checkName, checkBoolean, async (req, res) => {
+    const { id } = req.params;
+    try {
+        const updatedDino = await updatedDino(id, req.body);
+        res.status(200).json(updatedDino);
+    } catch (error) {
+        res.status(404).json({ error: `No dino with the id ${id} exists` });
+    }
+});
 
 module.exports = dinos;
