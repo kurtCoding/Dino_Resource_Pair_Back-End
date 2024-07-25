@@ -7,7 +7,7 @@ const {
     deleteDino,
     updateDino
 } = require("../queries/dinosaurs.js");
-const { checkName } = require("../validations/dinoCheck.js");   
+const { checkName, checkBoolean } = require("../validations/dinoCheck.js");   
 
 dinos.get("/", async (req, res) => {
     const allDinos = await getAllDinos();
@@ -18,9 +18,9 @@ dinos.get("/", async (req, res) => {
     }
 });
 
-dinos.get('/:name', async (req, res) => {
-    const name = req.params.name;
-    const dino = await getDino(name);
+dinos.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    const dino = await getDino(id);
     if (dino) {
       res.status(200).json(dino);
     } else {
@@ -37,7 +37,7 @@ dinos.delete("/:id", async (req, res) => {
     const { id } = req.params;
     const deletedDino = await deleteDino(id);
     if (deletedDino.id) {
-        res.status(200)/json(deletedDino);
+        res.status(200).json(deletedDino);
     } else {
         res.status(404).json("Dino not found");
     }
@@ -46,7 +46,7 @@ dinos.delete("/:id", async (req, res) => {
 dinos.put("/:id", checkName, checkBoolean, async (req, res) => {
     const { id } = req.params;
     try {
-        const updatedDino = await updatedDino(id, req.body);
+        const updatedDino = await updateDino(id, req.body);
         res.status(200).json(updatedDino);
     } catch (error) {
         res.status(404).json({ error: `No dino with the id ${id} exists` });
