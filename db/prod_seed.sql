@@ -1,7 +1,7 @@
-\c dinos_app_prod;
+\c dinosite_back_end;
 
 INSERT INTO 
-    dinos (id, name, era, diet, length, weight, habitat, year_discovered, bipedal) 
+    dinos (name, era, diet, length, weight, habitat, year_discovered, bipedal) 
 VALUES
     ('Tyrannosaurus Rex', 'Cretaceous', 'Carnivore', 40, 17000, 'North America', 1902, False),
     ('Triceratops', 'Cretaceous', 'Herbivore', 30, 26000, 'North America', 1887, False),

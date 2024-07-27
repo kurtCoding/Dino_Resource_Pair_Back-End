@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS dinos_app_prod;
-CREATE DATABASE dinos_app_prod;
+DROP DATABASE IF EXISTS dinosite_back_end;
+CREATE DATABASE dinosite_back_end;
 
-\c dinos_app_prod;
+\c dinosite_back_end;
 
 CREATE TABLE dinos (
     id SERIAL PRIMARY KEY,
